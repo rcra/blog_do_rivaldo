@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag @post.image.url(:medium) %>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @post.author %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @post.body %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @post.created_at.strftime("%d %b %Y - %H:%M:%S") %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= @post.updated_at.strftime("%d %b %Y - %H:%M:%S") %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+
+<h2>Comment:</h2>
+<%= render 'comments/form' %>
+
+<h2>Comments</h2>
+<% @post.comments.each do |comments| %>
+  <p>
+    <b>Name:</b>
+    <%= comments.name %>
+  </p>
+
+  <p>
+    <b>Comment:</b>
+    <%= comments.comment_body %>
+  </p>
+
+  <%= link_to 'Delete Comment', [comments.post, comments],
+  method: :delete,
+  data: { confirm: 'Are you sure?' } %>
+
+<hr />
+<% end %>
